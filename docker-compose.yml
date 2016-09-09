@@ -1,0 +1,21 @@
+version: "2"
+services:
+  app:
+    image: "ruby:2.3.1"
+    volumes:
+      - .:/usr/src/tic_tac_toe_api
+      - gems:/usr/local/bundle
+    network_mode: host
+    working_dir: /usr/src/tic_tac_toe_api
+
+  db:
+    image: mongo
+    volumes:
+      - db_data:/data/db
+    network_mode: host
+
+volumes:
+  db_data:
+    driver: local
+  gems:
+    driver: local
