@@ -9,6 +9,7 @@ shared_examples_for :a_game_endpoint do
     expect(parsed_body.dig(:data, :type)).to eq 'games'
     expect(parsed_body.dig(:data, :id)).to match(/^\h{24}$/)
     expect(parsed_body.dig(:data, :attributes, :board)).to be_an(Array)
+    expect(parsed_body.dig(:data, :attributes, :current_player)).to eq('cpu')
   end
 
   it 'responds with links' do

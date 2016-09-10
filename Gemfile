@@ -21,6 +21,8 @@ gem 'puma', '~> 3.0'
 # Mongo DB ORM
 gem 'mongoid', git: 'https://github.com/mongodb/mongoid.git'
 
+gem 'responders'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'

@@ -1,28 +1,52 @@
 # frozen_string_literal: true
 
 class GamesController < ApplicationController
-  def create
-    game = Game.create
-    set_location!(game)
+  before_action :load_game!, only: [:show, :destroy]
 
-    render json: GameSerializer.new(request.env, game), status: :created
+  def create
+    self.current_game = Game.create
+
+    respond_with GameSerializer, status: :created, location: current_game
   end
 
   def show
-    id = params[:id]
-    game = Game.find(id)
-
-    if game
-      render json: GameSerializer.new(request.env, game), status: :ok
+    if current_game
+      respond_with GameSerializer, status: :ok
     else
-      render json: NotFoundError.new(%Q(Game with id: #{id.inspect} could not be found)),
-        status: :not_found
+      fail_with_not_found!
+    end
+  end
+
+  def destroy
+    if current_game
+      current_game.destroy
+      head :no_content
+    else
+      fail_with_not_found!
     end
   end
 
   private
 
-  def set_location!(game)
-    response.location = request.env['url_helper'].url_for(game)
+  def load_game!
+    self.current_game = Game.find(requested_game_id)
+  end
+
+  def requested_game_id
+    params[:id]
+  end
+
+  def current_game=(game)
+    request.env['current_game'] = game
+  end
+
+  def current_game
+    request.env['current_game']
+  end
+
+  def fail_with_not_found!
+    respond_with NotFoundError,
+      message: %Q(Game with id: #{requested_game_id.inspect} could not be found),
+      status: :not_found
   end
 end

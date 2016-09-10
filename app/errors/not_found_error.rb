@@ -1,7 +1,6 @@
 class NotFoundError
-  attr_reader :message
-  def initialize(message)
-    @message = message
+  def initialize(env)
+    @env = env
   end
 
   def as_json(context = {})
@@ -9,7 +8,7 @@ class NotFoundError
       errors: [
         {
           title: :not_found,
-          detail: message
+          detail: context[:message]
         }
       ]
     }
