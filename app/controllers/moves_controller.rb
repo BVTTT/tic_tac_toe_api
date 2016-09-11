@@ -42,8 +42,8 @@ class MovesController < ApplicationController
   end
 
   def assert_correct_player!(expected_player)
-    if current_player != expected_player
-      fail WrongPlayerError, %Q(It is currently the #{current_player}'s turn)
+    if current_game.current_player != expected_player
+      fail WrongPlayerError, %Q(It is currently the #{current_game.current_player}'s turn)
     end
   end
 end
