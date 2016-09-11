@@ -8,7 +8,7 @@ class MovesController < ApplicationController
   def apply_cpu_move
     assert_correct_player! 'cpu'
 
-    decided_position = current_game.apply_cpu_move!
+    decided_position = current_game.apply_ai_driven_move!
 
     respond_with CpuMovesPayload, status: :ok, played_position: decided_position
   end
@@ -38,6 +38,12 @@ class MovesController < ApplicationController
   def assert_game_is_active!
     if(current_game.is_over?)
       fail InvalidMoveError, %q(Game is over. No more moves are allowed)
+    end
+  end
+
+  def assert_correct_player!(expected_player)
+    if current_player != expected_player
+      fail WrongPlayerError, %Q(It is currently the #{current_player}'s turn)
     end
   end
 end

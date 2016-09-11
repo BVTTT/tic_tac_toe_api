@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Game
   PLAYERS = %w( cpu user )
 
@@ -7,6 +9,7 @@ class Game
   field :current_player, type: String, default: 'cpu'
   field :ai_class_name, type: String, default: 'EasyAI'
 
+  # Applies a move for the current player
   def apply_move!(position)
     board_will_change!
 
@@ -17,7 +20,7 @@ class Game
     save
   end
 
-  def apply_cpu_move!
+  def apply_ai_driven_move!
     decided_position = ai.decide
 
     apply_move! decided_position
