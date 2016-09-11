@@ -32,11 +32,13 @@ Location: http://whateverthehostis/games/131231231
         [null, null, null],
         [null, null, null],
         [null, null, null]
-      ]
+      ],
+      "current_player": "cpu"
     }
   },
   "links": {
-    "self": "http://whateverthehostis/games/131231231"
+    "self": "http://whateverthehostis/games/131231231",
+    "current_player_moves": "http://whateverthehostis/games/131231231/cpu_moves"
   }
 }
 ```
@@ -45,7 +47,7 @@ Location: http://whateverthehostis/games/131231231
 
 ### Request
 ```http
-GET /games/123123123 HTTP/1.1
+GET /games/131231231 HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 Host: "whateverthehostis"
@@ -65,11 +67,55 @@ Content-Type: application/json
         [null, null, null],
         [null, null, null],
         [null, null, null]
-      ]
+      ],
+      "current_player": "cpu"
     }
   },
   "links": {
-    "self": "http://whateverthehostis/games/131231231"
+    "self": "http://whateverthehostis/games/131231231",
+    "current_player_moves": "http://whateverthehostis/games/131231231/cpu_moves"
   }
 }
 ```
+
+## Make CPU move
+
+### Request
+
+```http
+PUT /games/131231231/cpu_moves HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Host: "whateverthehostis"
+```
+
+### Response
+
+```http
+Content-Type: application/json
+
+{
+  "data": {
+    "type": "game",
+    "id": "131231231",
+    "attributes": {
+      "board": [
+        [null, "cpu", null],
+        [null, null, null],
+        [null, null, null]
+      ],
+      "current_player": "user"
+    }
+  },
+  "links": {
+    "self": "http://whateverthehostis/games/131231231",
+    "current_player_moves": "http://whateverthehostis/games/131231231/user_moves"
+  },
+  "related": {
+    "cpu_moves": {
+      "played_position": [0, 1]
+    }
+  }
+}
+```
+
