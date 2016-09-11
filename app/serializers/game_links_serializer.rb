@@ -10,6 +10,8 @@ class GameLinksSerializer < Serializer
   end
 
   def current_player_move_path
+    return nil if current_game.is_over?
+
     case current_game.current_player
     when 'cpu'
       cpu_moves_url(current_game)

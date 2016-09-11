@@ -32,4 +32,24 @@ class Game
   def ai
     Object.const_get(ai_class_name).new(board)
   end
+
+  def has_winner?
+    !winner.nil?
+  end
+
+  def is_deadlocked?
+    !has_winner? && board.available_positions.none?
+  end
+
+  def is_over?
+    has_winner? || is_deadlocked?
+  end
+
+  def winner
+    winning_combination = board.winning_combinations.find do |set|
+      set.all? { |element| !element.nil? && element == set.first }
+    end
+
+    winning_combination&.first
+  end
 end

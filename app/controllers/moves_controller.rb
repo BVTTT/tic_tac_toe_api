@@ -3,6 +3,7 @@
 class MovesController < ApplicationController
   include CurrentGameAccessors
   before_action LoadGameFilter
+  before_action :assert_game_is_active!
 
   def apply_cpu_move
     assert_correct_player! 'cpu'
@@ -31,6 +32,12 @@ class MovesController < ApplicationController
   def assert_correct_player!(expected_player)
     if current_game.current_player != expected_player
       fail WrongPlayerError, %Q(It is currently the #{current_game.current_player}'s turn)
+    end
+  end
+
+  def assert_game_is_active!
+    if(current_game.is_over?)
+      fail InvalidMoveError, %q(Game is over. No more moves are allowed)
     end
   end
 end
