@@ -3,8 +3,9 @@
 describe 'End a game' do
   describe 'DELETE /games/:id' do
     describe 'when game exists' do
+      include_context :after_creating_an_easy_game
+
       before do
-        post games_path, headers: {'Host': 'tictactoe.api'}
         @game_location = response.location
 
         delete @game_location

@@ -17,6 +17,6 @@ shared_examples_for :a_game_endpoint do |current_player: 'cpu'|
   end
 
   it 'responds with links' do
-    expect(parsed_body.dig(:links, :self)).to match(%r(^http://tictactoe\.api/games/\h{24}$))
+    expect(parsed_body.dig(:links, :self)).to match(%r(^http://www\.example\.com/games/\h{24}$))
   end
 end

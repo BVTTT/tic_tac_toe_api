@@ -5,12 +5,13 @@ describe 'User moves' do
 
   describe 'PUT /games/:id/user_moves' do
     context 'when its the users turn' do
+      include_context :after_creating_an_easy_game
+
       let(:current_game) do
         Game.find(@game_id)
       end
 
       before do
-        post games_path
         @game_id = parsed_body.dig(:data, :id)
 
         # Make cpu play

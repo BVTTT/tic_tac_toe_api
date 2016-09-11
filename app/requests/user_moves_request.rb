@@ -1,9 +1,5 @@
-class UserMovesRequest
+class UserMovesRequest < BaseRequest
   include RequestProcessor
-
-  def resource_type
-    params.dig(:data, :type)
-  end
 
   def given_position
     if raw_given_position.respond_to?(:map)

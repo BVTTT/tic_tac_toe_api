@@ -6,7 +6,10 @@ class GamesController < ApplicationController
   before_action LoadGameFilter, only: %i( show destroy )
 
   def create
-    self.current_game = Game.create
+    current_request = CreateGameRequest.new(request)
+    current_request.validate!
+
+    self.current_game = Game.create ai_class_name: current_request.desired_ai_class_name
 
     respond_with GamePayload, status: :created, location: current_game
   end

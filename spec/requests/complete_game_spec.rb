@@ -4,6 +4,7 @@ describe 'complete a game', :complete_game do
   RANDOM_SEED = 7
 
   include ResponseHelpers
+  include_context :after_creating_an_easy_game
 
   def make_user_move!
     payload = {
@@ -34,9 +35,6 @@ describe 'complete a game', :complete_game do
   after { Kernel.srand }
 
   before do
-    # Start a game
-    post games_path
-
     @game_id = parsed_body.dig(:data, :id)
     @cpu_player_moves_url = parsed_body.dig(:links, :current_player_moves)
 

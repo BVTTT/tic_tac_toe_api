@@ -3,8 +3,9 @@
 describe 'start a new game' do
   describe 'GET /games/:id' do
     context 'when game exists' do
+      include_context :after_creating_an_easy_game
+
       before do
-        post games_path, headers: {'Host': 'tictactoe.api'}
         game_location = response.location
 
         get game_location
@@ -21,7 +22,7 @@ describe 'start a new game' do
       include ResponseHelpers
 
       before do
-        get game_path(id: 'some-unknown'), headers: { 'Host': 'tictactoe.api' }
+        get game_path(id: 'some-unknown')
       end
 
       it 'responds with 404' do

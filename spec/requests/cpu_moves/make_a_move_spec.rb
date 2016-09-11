@@ -5,15 +5,15 @@ describe 'Cpu moves' do
 
   describe 'PUT /games/:id/cpu_moves' do
     describe 'make a cpu move' do
-      before do
-        post games_path, headers: { Host: 'tictactoe.api' }
+      include_context :after_creating_an_easy_game
 
+      before do
         @cpu_moves_path = parsed_body.dig(:links, :current_player_moves)
       end
 
       context 'when its the cpu turn' do
         before do
-          put @cpu_moves_path, headers: { Host: 'tictactoe.api' }
+          put @cpu_moves_path
         end
 
         it_behaves_like :a_game_endpoint, current_player: 'user'
@@ -30,9 +30,9 @@ describe 'Cpu moves' do
 
       context 'when its the users turn' do
         before do
-          put @cpu_moves_path, headers: { Host: 'tictactoe.api' }
+          put @cpu_moves_path
 
-          put @cpu_moves_path, headers: { Host: 'tictactoe.api' }
+          put @cpu_moves_path
         end
 
         it 'responds with 422' do
