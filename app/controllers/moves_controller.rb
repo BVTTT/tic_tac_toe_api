@@ -15,6 +15,7 @@ class MovesController < ApplicationController
 
   def apply_user_move
     assert_correct_player! 'user'
+    validate_user_moves_payload!
 
     given_position = params.dig(:data, :attributes, :position).map(&:to_i)
 
@@ -38,6 +39,23 @@ class MovesController < ApplicationController
   def assert_game_is_active!
     if(current_game.is_over?)
       fail InvalidMoveError, %q(Game is over. No more moves are allowed)
+    end
+  end
+
+  # Simple payload validation
+  #
+  # This could be done in a much cleaner way with something like JSON Schema
+  # But the validation is simple enough so I don't mind implementing it
+  def validate_user_moves_payload!
+    resource_type = params.dig(:data, :type)
+    played_position = params.dig(:data, :attributes, :position)
+
+    unless resource_type === 'user_moves'
+      fail PayloadValidationError, 'Invalid resource type at "data.type", expected "user_moves"'
+    end
+
+    unless played_position.is_a?(Array) && played_position.length == 2
+      fail PayloadValidationError, 'Invalid resource type at "data.attributes.position", expected Array([x, y])'
     end
   end
 end
