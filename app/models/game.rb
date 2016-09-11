@@ -17,10 +17,6 @@ class Game
     save
   end
 
-  def next_player
-    (PLAYERS - [current_player]).first
-  end
-
   def apply_cpu_move!
     decided_position = ai.decide
 
@@ -31,6 +27,10 @@ class Game
 
   def ai
     Object.const_get(ai_class_name).new(board)
+  end
+
+  def next_player
+    (PLAYERS - [current_player]).first
   end
 
   def has_winner?

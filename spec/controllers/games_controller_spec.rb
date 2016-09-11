@@ -1,3 +1,0 @@
-describe GamesController do
-
-end
