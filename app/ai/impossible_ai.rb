@@ -6,7 +6,6 @@ class ImpossibleAI < EasyAI
 
   def initialize(board, player_name: 'cpu')
     super(board)
-    @difficulty = 'impossible'
 
     # Use the user name to make smart decisions about where to play
     @player_name = player_name
