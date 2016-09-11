@@ -19,7 +19,7 @@ class MovesController < ApplicationController
     current_request.validate!
 
     if current_game.board.valid_position?(current_request.given_position)
-      current_game.make_move! current_request.given_position
+      current_game.apply_move! current_request.given_position
     else
       fail InvalidMoveError, %Q(Given position #{current_request.given_position} is out of bounds)
     end

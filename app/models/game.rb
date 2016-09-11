@@ -7,7 +7,7 @@ class Game
   field :current_player, type: String, default: 'cpu'
   field :ai_class_name, type: String, default: 'EasyAI'
 
-  def make_move!(position)
+  def apply_move!(position)
     board_will_change!
 
     x, y = position
@@ -20,7 +20,7 @@ class Game
   def apply_cpu_move!
     decided_position = ai.decide
 
-    make_move! decided_position
+    apply_move! decided_position
 
     decided_position
   end
