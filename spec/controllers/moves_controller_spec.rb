@@ -6,7 +6,7 @@ describe MovesController do
   let(:game) { Game.create }
 
   before do
-    game.apply_cpu_move!
+    game.apply_ai_driven_move!
   end
 
   describe 'PUT apply_user_move' do

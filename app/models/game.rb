@@ -49,10 +49,6 @@ class Game
   end
 
   def winner
-    winning_combination = board.winning_combinations.find do |set|
-      set.all? { |element| !element.nil? && element == set.first }
-    end
-
-    winning_combination&.first
+    GameRules.find_winner(board)
   end
 end

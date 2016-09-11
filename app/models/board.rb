@@ -28,33 +28,31 @@ class Board
     alias_method :evolve, :mongoize
 
     def demongoize(object)
-      Board.new(rows: object.dup)
+      Board.new(grid: object.dup)
     end
   end
 
-  attr_reader :rows
-  def_delegator :rows, :size
+  attr_reader :grid
+  def_delegator :grid, :size
 
-  def initialize(size: 3, rows: Array.new(size) { Array.new(size) })
-    @rows = rows
+  def initialize(size: 3, grid: Array.new(size) { Array.new(size) })
+    @grid = grid
   end
 
   def as_json(context = {})
-    rows
+    grid
   end
-
-  alias_method :mongoize, :as_json
 
   def []=(x, y, new_value)
     unless valid_position?([x, y])
       fail OutOfBoundsError, "Given position([#{x}, #{y}]) is out of bounds"
     end
 
-    rows[y][x] = new_value
+    grid[y][x] = new_value
   end
 
   def [](x, y)
-    rows[y][x]
+    grid[y][x]
   end
 
   def winning_combinations
@@ -64,11 +62,25 @@ class Board
   def each
     return to_enum(:each) unless block_given?
 
-    rows.each.with_index do |row, y|
-      row.each.with_index do |value, x|
-        yield Position.new(x, y, value)
-      end
+    each_row do |row|
+      row.each { |position| yield position }
     end
+  end
+
+  def each_row
+    return to_enum(:each_row) unless block_given?
+
+    grid.each.with_index do |row, y|
+      positions = row.map.with_index do |value, x|
+        Position.new(x, y, value)
+      end
+
+      yield positions
+    end
+  end
+
+  def rows
+    each_row.to_a
   end
 
   def available_positions
@@ -92,7 +104,7 @@ class Board
 
     from_top, from_bottom = [], []
 
-    while(top_iterator < rows.length)
+    while(top_iterator < grid.length)
       top_row = rows[top_iterator]
       bottom_row = rows[bottom_iterator]
 

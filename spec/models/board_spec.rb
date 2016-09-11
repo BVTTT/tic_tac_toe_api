@@ -15,7 +15,11 @@ describe Board do
     end
 
     it 'returns elements diagonally places on the board' do
-      expect(subject.diagonals).to eq [[1, 2, 3], [4, 2, 5]]
+      simplified_diagonals = subject.diagonals.map do |set|
+        set.map(&:value)
+      end
+
+      expect(simplified_diagonals).to eq [[1, 2, 3], [4, 2, 5]]
     end
   end
 
