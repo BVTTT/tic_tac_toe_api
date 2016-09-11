@@ -8,6 +8,6 @@ module LinkGeneration
   end
 
   def default_url_options
-    {host: request.host}
+    {host: request.host, port: request.port}
   end
 end
