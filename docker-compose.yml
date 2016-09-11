@@ -7,6 +7,7 @@ services:
       - gems:/usr/local/bundle
     network_mode: host
     working_dir: /usr/src/tic_tac_toe_api
+    command: rails s -b 0.0.0.0
 
   db:
     image: mongo

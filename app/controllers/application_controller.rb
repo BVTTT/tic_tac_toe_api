@@ -9,4 +9,8 @@ class ApplicationController < ActionController::API
   def home
     respond_with HomePayload, status: :ok
   end
+
+  def endpoint_missing
+    fail EndpointNotImplementedError, 'The requested endpoint is not implemented'
+  end
 end

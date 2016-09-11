@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     put '/games/:id/user_moves', to: 'moves#apply_user_move', as: :user_moves
 
     root to: 'application#home'
+
+    match '*unmatched_route', via: :all, to: 'application#endpoint_missing'
   end
 end
