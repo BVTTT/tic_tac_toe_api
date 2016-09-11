@@ -1,7 +1,19 @@
 class Board
   extend Forwardable
+  include Enumerable
 
   class OutOfBoundsError < RuntimeError; end
+
+  Position = Struct.new(:x, :y, :value) do
+    def to_a
+      [x, y]
+    end
+    alias_method :to_ary, :to_a
+
+    def available?
+      value.nil?
+    end
+  end
 
   class << self
     # Mongoid callbacks
@@ -16,9 +28,12 @@ class Board
     alias_method :evolve, :mongoize
 
     def demongoize(object)
-      Board.new(rows: object)
+      Board.new(rows: object.dup)
     end
   end
+
+  attr_reader :rows
+  def_delegator :rows, :size
 
   def initialize(size: 3, rows: Array.new(size) { Array.new(size) })
     @rows = rows
@@ -28,9 +43,11 @@ class Board
     rows
   end
 
+  alias_method :mongoize, :as_json
+
   def []=(x, y, new_value)
-    unless valid_position?(x, y)
-      fail OutOfBoundsError, "Given [#{x}, #{y}]"
+    unless valid_position?([x, y])
+      fail OutOfBoundsError, "Given position([#{x}, #{y}]) is out of bounds"
     end
 
     rows[y][x] = new_value
@@ -44,20 +61,23 @@ class Board
     [*rows, *columns, *diagonals]
   end
 
-  def available_positions
-    rows.each.with_object([]).with_index do |(row, list), row_index|
-      row.each_with_index do |value, column_index|
-        if(value.nil?)
-          list.push([column_index, row_index])
-        end
+  def each
+    return to_enum(:each) unless block_given?
+
+    rows.each.with_index do |row, y|
+      row.each.with_index do |value, x|
+        yield Position.new(x, y, value)
       end
     end
   end
 
-  private
+  def available_positions
+    select(&:available?)
+  end
 
-  attr_reader :rows
-  def_delegator :rows, :size
+  def unavailable_positions
+    reject(&:available?)
+  end
 
   def columns
     rows.transpose
@@ -86,7 +106,8 @@ class Board
     [from_top, from_bottom]
   end
 
-  def valid_position?(x, y)
+  def valid_position?(position)
+    x, y = position
     x.between?(0, size - 1) && y.between?(0, size - 1) && self[x, y].nil?
   end
 end

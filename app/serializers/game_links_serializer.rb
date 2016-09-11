@@ -1,6 +1,6 @@
 class GameLinksSerializer < Serializer
   include CurrentGameAccessors::Reader
-  include Rails.application.routes.url_helpers
+  include LinkGeneration
 
   def as_json(context = {})
     {
@@ -9,16 +9,12 @@ class GameLinksSerializer < Serializer
     }
   end
 
-  def default_url_options
-    {host: request.host}
-  end
-
   def current_player_move_path
     case current_game.current_player
     when 'cpu'
-      cpu_moves_path(current_game)
+      cpu_moves_url(current_game)
     else
-      '' # Empty for now
+      user_moves_url(current_game)
     end
   end
 end

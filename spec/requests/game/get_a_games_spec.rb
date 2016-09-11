@@ -18,7 +18,7 @@ describe 'start a new game' do
     end
 
     context 'when game doesnt exist' do
-      include_context :request
+      include ResponseHelpers
 
       before do
         get game_path(id: 'some-unknown'), headers: { 'Host': 'tictactoe.api' }

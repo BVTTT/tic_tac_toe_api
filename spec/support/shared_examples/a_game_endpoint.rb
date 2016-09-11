@@ -1,5 +1,5 @@
 shared_examples_for :a_game_endpoint do |current_player: 'cpu'|
-  include_context :request
+  include ResponseHelpers
 
   it 'responds with the correct content-type' do
     expect(response.content_type).to eq 'application/json'

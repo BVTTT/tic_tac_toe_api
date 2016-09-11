@@ -1,7 +1,7 @@
 describe Board do
   subject { described_class.new(size: 3) }
 
-  describe 'private #diagonals' do
+  describe '#diagonals' do
     before do
       # left diagonals
       subject[0, 0] = 1
@@ -15,7 +15,7 @@ describe Board do
     end
 
     it 'returns elements diagonally places on the board' do
-      expect(subject.send :diagonals).to eq [[1, 2, 3], [4, 2, 5]]
+      expect(subject.diagonals).to eq [[1, 2, 3], [4, 2, 5]]
     end
   end
 
@@ -42,14 +42,14 @@ describe Board do
 
   describe '#available_positions' do
     it 'returns a of the available positions' do
-      expect(subject.available_positions).to eq [
+      expect(subject.available_positions.map(&:to_a)).to eq [
         [0, 0], [1, 0], [2, 0],
         [0, 1], [1, 1], [2, 1],
         [0, 2], [1, 2], [2, 2],
       ]
       subject[1, 1] = :x
 
-      expect(subject.available_positions).to eq [
+      expect(subject.available_positions.map(&:to_a)).to eq [
         [0, 0], [1, 0], [2, 0],
         [0, 1],         [2, 1],
         [0, 2], [1, 2], [2, 2],

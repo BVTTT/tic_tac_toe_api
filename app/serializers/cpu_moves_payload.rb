@@ -7,7 +7,7 @@ class CpuMovesPayload < Serializer
       links: GameLinksSerializer.new(request),
       related: {
         cpu_moves: {
-          played_position: request.env['ai.played_position']
+          played_position: context.fetch(:played_position)
         }
       }
     }

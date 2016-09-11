@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe 'Cpu moves' do
-  include_context :request
+  include ResponseHelpers
 
   describe 'PUT /games/:id/cpu_moves' do
     describe 'make a cpu move' do
