@@ -1,16 +1,9 @@
-class NotFoundError
-  def initialize(env)
-    @env = env
+class NotFoundError < ApiError
+  def status_code
+    :not_found
   end
 
-  def as_json(context = {})
-    {
-      errors: [
-        {
-          title: :not_found,
-          detail: context[:message]
-        }
-      ]
-    }
+  def title
+    :not_found
   end
 end

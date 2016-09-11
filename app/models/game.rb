@@ -1,11 +1,18 @@
 class Game
+  PLAYERS = %w( cpu user )
+
   include Mongoid::Document
 
-  field :board, type: Array, default: -> { Game.new_board }
+  field :board, type: Board, default: -> { Board.new }
+  field :current_player, type: String, default: 'cpu'
 
-  field :current_player, type: String, default: :cpu
+  def make_move!(position)
+    x, y = position
+    board[x, y] = current_player
+    self.current_player = next_player
+  end
 
-  def self.new_board
-    Array.new(3) { Array.new(3) }
+  def next_player
+    (PLAYERS - [current_player]).first
   end
 end
