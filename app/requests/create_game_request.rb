@@ -22,7 +22,7 @@ class CreateGameRequest < BaseRequest
     end
 
     unless difficulty.in? %w( easy impossible )
-      fail PayloadValidationError, 'Invalid resource type at "data.attributes.position", expected "easy" or "impossible"'
+      fail PayloadValidationError, 'Invalid resource type at "data.attributes.difficulty", expected "easy" or "impossible"'
     end
   end
 end
