@@ -5,7 +5,9 @@ class GameLinksSerializer < Serializer
   def as_json(context = {})
     {
       self: url_for(current_game),
-      current_player_moves: current_player_move_path
+      current_player_moves: current_player_move_path,
+      cpu_moves: cpu_moves_url(current_game),
+      user_moves: user_moves_url(current_game)
     }
   end
 
