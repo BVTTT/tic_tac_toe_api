@@ -21,10 +21,10 @@ class GameSerializer < Serializer
 
   def difficulty
     case current_game.ai
-    when EasyAI
-      'easy'
     when ImpossibleAI
       'impossible'
+    when EasyAI
+      'easy'
     end
   end
 end
