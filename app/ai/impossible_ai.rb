@@ -39,6 +39,6 @@ class ImpossibleAI < EasyAI
       count_played == 2 && combination.any?(&:available?)
     end
 
-    winning_combination&.find(&:available?)
+    winning_combination&.find(&:available?)&.to_a
   end
 end
