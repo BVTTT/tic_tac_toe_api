@@ -79,7 +79,7 @@ Location: http://whateverthehostis/games/{{ id }}
   },
   "links": {
     "self": "http://whateverthehostis/games/{{ id }}",
-    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves"
+    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "cpu_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "user_moves": "http://whateverthehostis/games/{{ id }}/user_moves"
   }
@@ -119,7 +119,7 @@ Content-Type: application/json
   },
   "links": {
     "self": "http://whateverthehostis/games/{{ id }}",
-    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves"
+    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "cpu_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "user_moves": "http://whateverthehostis/games/{{ id }}/user_moves"
   }
@@ -178,7 +178,7 @@ Content-Type: application/json
   },
   "links": {
     "self": "http://whateverthehostis/games/{{ id }}",
-    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves"
+    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "cpu_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "user_moves": "http://whateverthehostis/games/{{ id }}/user_moves"
   },
@@ -224,7 +224,7 @@ Content-Type: application/json
   },
   "links": {
     "self": "http://whateverthehostis/games/{{ id }}",
-    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves"
+    "current_player_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "cpu_moves": "http://whateverthehostis/games/{{ id }}/cpu_moves",
     "user_moves": "http://whateverthehostis/games/{{ id }}/user_moves"
   }
