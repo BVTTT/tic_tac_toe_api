@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # AI class that simply chooses a random position to play in
-class ImpossibleAI < EasyAI
+class HardAI < EasyAI
   attr_reader :player_name
 
   def initialize(board, player_name: 'cpu')
