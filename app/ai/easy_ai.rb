@@ -9,6 +9,6 @@ class EasyAI
   end
 
   def decide
-    board.available_positions.sample.to_a
+    board.available_positions.sample
   end
 end

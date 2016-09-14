@@ -4,20 +4,8 @@ class Board
 
   class OutOfBoundsError < RuntimeError; end
 
-  Position = Struct.new(:x, :y, :value) do
-    def to_a
-      [x, y]
-    end
-    alias_method :to_ary, :to_a
-
-    def available?
-      value.nil?
-    end
-  end
-
   class << self
     # Mongoid callbacks
-    # See https://docs.mongodb.com/ruby-driver/master/tutorials/mongoid-documents/#custom-fields
     def mongoize(object)
       if object.respond_to?(:as_json)
         object.as_json

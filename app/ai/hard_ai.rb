@@ -39,6 +39,6 @@ class HardAI < EasyAI
       count_played == 2 && combination.any?(&:available?)
     end
 
-    winning_combination&.find(&:available?)&.to_a
+    winning_combination&.find(&:available?)
   end
 end
