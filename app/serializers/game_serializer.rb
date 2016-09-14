@@ -7,7 +7,7 @@ class GameSerializer < Serializer
         id: current_game.id.to_s,
         attributes: {
           current_player: current_game.current_player,
-          difficulty: difficulty,
+          difficulty: current_game.difficulty,
           winner: current_game.winner,
           states: {
             has_winner: current_game.has_winner?,
@@ -16,14 +16,5 @@ class GameSerializer < Serializer
           }
         }
       }
-  end
-
-  def difficulty
-    case current_game.ai
-    when ImpossibleAI
-      'impossible'
-    when EasyAI
-      'easy'
-    end
   end
 end

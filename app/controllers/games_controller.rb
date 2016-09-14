@@ -9,7 +9,7 @@ class GamesController < ApplicationController
     current_request = CreateGameRequest.new(request)
     current_request.validate!
 
-    self.current_game = Game.create ai_class_name: current_request.desired_ai_class_name
+    self.current_game = Game.create current_request.attributes
 
     respond_with GamePayload, status: :created, location: current_game
   end

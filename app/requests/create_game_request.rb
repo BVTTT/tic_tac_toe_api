@@ -3,17 +3,12 @@
 class CreateGameRequest < BaseRequest
   include RequestProcessor
 
-  def desired_ai_class_name
-    case difficulty
-    when 'easy'
-      'EasyAI'
-    when 'impossible'
-      'ImpossibleAI'
-    end
-  end
-
   def difficulty
     params.dig(:data, :attributes, :difficulty)
+  end
+
+  def attributes
+    { difficulty: difficulty }
   end
 
   def validate!

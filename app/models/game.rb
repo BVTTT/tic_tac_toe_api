@@ -7,7 +7,7 @@ class Game
 
   field :board, type: Board, default: -> { Board.new }
   field :current_player, type: String, default: 'cpu'
-  field :ai_class_name, type: String, default: 'EasyAI'
+  field :difficulty, type: String, default: 'easy'
 
   # Applies a move for the current player
   def apply_move!(position)
@@ -28,8 +28,17 @@ class Game
     decided_position
   end
 
+  def ai_class
+    case difficulty
+    when 'easy'
+      EasyAI
+    else
+      HardAI
+    end
+  end
+
   def ai
-    Object.const_get(ai_class_name).new(board)
+    ai_class.new(board)
   end
 
   def next_player
