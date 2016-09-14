@@ -64,7 +64,7 @@ Location: http://whateverthehostis/games/{{ id }}
 
 {
   "data": {
-    "type": "game",
+    "type": "games",
     "id": "{{ id }}",
     "attributes": {
       "current_player": "cpu",
@@ -104,7 +104,7 @@ Content-Type: application/json
 
 {
   "data": {
-    "type": "game",
+    "type": "games",
     "id": "{{ id }}",
     "attributes": {
       "current_player": "cpu",
@@ -163,7 +163,7 @@ Content-Type: application/json
 
 {
   "data": {
-    "type": "game",
+    "type": "games",
     "id": "{{ id }}",
     "attributes": {
       "current_player": "cpu",
@@ -209,7 +209,7 @@ Content-Type: application/json
 
 {
   "data": {
-    "type": "game",
+    "type": "games",
     "id": "{{ id }}",
     "attributes": {
       "current_player": "cpu",
