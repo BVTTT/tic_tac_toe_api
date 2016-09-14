@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# AI class that simply chooses a random position to play in
 class HardAI < EasyAI
   attr_reader :player_name
 
@@ -15,30 +14,44 @@ class HardAI < EasyAI
     board.available_positions.map(&:to_a)
   end
 
+  # Decision is made in this order
+  #
+  # Try to block or win if possible
+  # play in a position that has potential (its inline with a potential win)
+  # play in the middle
+  # Take a corner
+  # Random
   def decide
     corners = [[0, 0], [0, 2], [2, 0], [2, 2]]
 
     available_corners = available_positions & corners
+    middle = available_positions & [[1, 1]]
 
-    position = if available_positions.count.between?(6, 9)
-      # First choose a random corner
-      available_corners.sample
-    elsif available_positions.count.between?(4, 5)
-      find_winning_move || available_corners.sample
-    else
-      find_winning_move
-    end
-
-    position || super # Fallback to a more primitive decision
+    find_winning_move_or_block ||
+      find_position_with_potential ||
+      middle.first ||
+      available_corners.sample ||
+      super
   end
 
-  def find_winning_move
-    winning_combination = board.winning_combinations.find do |combination|
-      count_played = combination.count { |position| position.value === player_name }
+  def find_winning_move_or_block
+    find_in_winning_combination do |combination|
+      taken_positions = combination.reject(&:available?)
+      unique_positions = taken_positions.uniq { |position| position.value }
 
-      count_played == 2 && combination.any?(&:available?)
+      [taken_positions.count, unique_positions.count] == [2, 1]
     end
+  end
 
-    winning_combination&.find(&:available?)
+  def find_position_with_potential
+    find_in_winning_combination do |combination|
+      has_a_taken_position = combination.any? { |position| position.value == player_name }
+      has_a_taken_position && combination.count(&:available?) == 2
+    end
+  end
+
+  def find_in_winning_combination(&block)
+    positions = board.winning_combinations.find(&block)
+    positions&.find(&:available?)
   end
 end
