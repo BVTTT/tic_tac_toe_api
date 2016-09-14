@@ -5,7 +5,7 @@ module FirstPlayerStrategy
     strategy = Settings.game.first_player_strategy
     case strategy
     when 'random'
-      -> { %( cpu user ).sample }
+      -> { %w( cpu user ).sample }
     else
       strategy
     end
