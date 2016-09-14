@@ -12,6 +12,19 @@ bundle install
 rspec
 ```
 
+# Attributes
+
+## Position
+
+A position is represented as a 2 element array in format of [x, y]. The grid's
+position are considered to be:
+
+[0, 0] | [1, 0] | [2, 0]
+-------+--------+-------
+[0, 1] | [1, 1] | [2, 1]
+-------+--------+-------
+[0, 2] | [1, 2] | [2, 2]
+
 # Endpoints
 
 ## Home
