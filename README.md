@@ -80,6 +80,17 @@ Location: http://whateverthehostis/games/{{ id }}
     "type": "games",
     "id": "{{ id }}",
     "attributes": {
+      "available_positions": [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+        [0, 1],
+        [1, 1],
+        [2, 1],
+        [0, 2],
+        [1, 2],
+        [2, 2]
+      ],
       "current_player": "cpu",
       "difficulty": "easy",
       "winner": null,
@@ -120,6 +131,17 @@ Content-Type: application/json
     "type": "games",
     "id": "{{ id }}",
     "attributes": {
+      "available_positions": [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+        [0, 1],
+        [1, 1],
+        [2, 1],
+        [0, 2],
+        [1, 2],
+        [2, 2]
+      ],
       "current_player": "cpu",
       "difficulty": "easy",
       "winner": null,
@@ -179,6 +201,17 @@ Content-Type: application/json
     "type": "games",
     "id": "{{ id }}",
     "attributes": {
+      "available_positions": [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+        [0, 1],
+        [1, 1],
+        [2, 1],
+        [0, 2],
+        [1, 2],
+        [2, 2]
+      ],
       "current_player": "cpu",
       "difficulty": "easy",
       "winner": null,
@@ -225,6 +258,17 @@ Content-Type: application/json
     "type": "games",
     "id": "{{ id }}",
     "attributes": {
+      "available_positions": [
+        [0, 0],
+        [1, 0],
+        [2, 0],
+        [0, 1],
+        [1, 1],
+        [2, 1],
+        [0, 2],
+        [1, 2],
+        [2, 2]
+      ],
       "current_player": "cpu",
       "difficulty": "easy",
       "winner": null,
