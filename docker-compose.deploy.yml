@@ -1,0 +1,22 @@
+version: "2"
+services:
+  app:
+    image: tic_tac_toe_api
+    ports:
+      - 80:3000
+    links:
+      - db
+    environment:
+      DB_HOST: db
+      RAILS_ENV: production
+      # Should be passed during init of app
+      SECRET_KEY_BASE: e967fe11cd5adc17888bc620ed10940e4039c32ef2d17c3b6a0b1fe28bc58826ee6a1200cfefbbe152d72b618f46b7be2c6783e2a1a24e676293c217f2ff9f8a
+
+  db:
+    image: mongo
+    volumes:
+      - db_data:/data/db
+
+volumes:
+  db_data:
+    driver: local
