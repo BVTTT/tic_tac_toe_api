@@ -42,7 +42,7 @@ describe 'User moves' do
         it 'updates the board with the users move' do
           put parsed_body.dig(:links, :current_player_moves), params: payload
 
-          expect(parsed_body.dig(:data, :attributes, :board, *player_move)).to eq 'user'
+          expect(current_game.reload.board[*player_move]).to eq 'user'
         end
       end
 
