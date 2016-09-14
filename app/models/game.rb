@@ -6,7 +6,7 @@ class Game
   include Mongoid::Document
 
   field :board, type: Board, default: -> { Board.new }
-  field :current_player, type: String, default: 'cpu'
+  field :current_player, type: String, default: FirstPlayerStrategy.call
   field :difficulty, type: String, default: 'easy'
 
   # Applies a move for the current player

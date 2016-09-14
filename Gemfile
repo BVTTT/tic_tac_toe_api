@@ -21,6 +21,8 @@ gem 'mongoid', git: 'https://github.com/mongodb/mongoid.git'
 
 gem 'responders'
 
+gem 'config'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
